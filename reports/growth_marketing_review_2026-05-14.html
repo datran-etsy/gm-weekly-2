@@ -4,354 +4,933 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Growth Marketing Weekly Review — 2026-05-14</title>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
 <style>
   :root {
-    --etsy-orange: #F1641E;
-    --etsy-dark: #222222;
-    --etsy-light-bg: #F7F7F7;
-    --etsy-border: #D9D9D9;
-    --green: #2E7D32;
+    --orange: #F1641E;
+    --orange-light: #FFF3EE;
+    --orange-mid: #FDDCC8;
+    --dark: #1A1A1A;
+    --gray: #555;
+    --border: #E8E8E8;
+    --bg: #F5F5F5;
+    --white: #FFFFFF;
+    --green: #1B8B45;
+    --green-bg: #EAF7EE;
     --red: #C62828;
-    --amber: #E65100;
-    --blue: #1565C0;
+    --red-bg: #FDECEA;
+    --amber: #B45309;
+    --amber-bg: #FEF3C7;
+    --blue: #1D4ED8;
+    --blue-bg: #EFF6FF;
+    --purple: #7C3AED;
+    --purple-bg: #F5F3FF;
   }
   * { box-sizing: border-box; margin: 0; padding: 0; }
-  body { font-family: 'Helvetica Neue', Arial, sans-serif; font-size: 14px; color: var(--etsy-dark); background: #FAFAFA; line-height: 1.6; }
-  .container { max-width: 1100px; margin: 0 auto; padding: 24px 32px; }
-  .header { background: var(--etsy-orange); color: white; padding: 28px 32px; margin-bottom: 32px; border-radius: 6px; }
-  .header h1 { font-size: 22px; font-weight: 700; margin-bottom: 6px; }
-  .header .meta { font-size: 13px; opacity: 0.9; }
-  h1 { font-size: 20px; color: var(--etsy-dark); margin: 28px 0 12px; }
-  h2 { font-size: 17px; color: var(--etsy-dark); margin: 24px 0 10px; padding-bottom: 6px; border-bottom: 2px solid var(--etsy-border); }
-  h3 { font-size: 15px; color: var(--etsy-dark); margin: 18px 0 8px; }
-  h4 { font-size: 14px; color: #555; margin: 14px 0 6px; }
-  p { margin: 8px 0; }
-  hr { border: none; border-top: 1px solid var(--etsy-border); margin: 24px 0; }
-  blockquote { background: #FFF8F5; border-left: 4px solid var(--etsy-orange); padding: 12px 16px; margin: 12px 0; border-radius: 0 4px 4px 0; font-style: italic; color: #555; }
-  table { width: 100%; border-collapse: collapse; margin: 14px 0; font-size: 13px; }
-  th { background: var(--etsy-dark); color: white; padding: 9px 12px; text-align: left; font-weight: 600; }
-  td { padding: 8px 12px; border-bottom: 1px solid var(--etsy-border); }
-  tr:nth-child(even) td { background: #F9F9F9; }
-  tr:hover td { background: #FFF3EE; }
-  ul, ol { margin: 8px 0 8px 22px; }
-  li { margin: 4px 0; }
-  code { background: #F0F0F0; padding: 1px 5px; border-radius: 3px; font-family: monospace; font-size: 12px; }
-  strong { color: var(--etsy-dark); }
-  .flag-box { background: #FFF8E1; border: 1px solid #FFB300; border-radius: 4px; padding: 12px 16px; margin: 12px 0; }
-  .pipeline-unknown { background: #FFF3E0; border-left: 4px solid var(--amber); padding: 12px 16px; margin: 12px 0; border-radius: 0 4px 4px 0; }
-  .footer { margin-top: 40px; padding-top: 16px; border-top: 1px solid var(--etsy-border); font-size: 12px; color: #888; text-align: center; }
+  html { scroll-behavior: smooth; }
+  body { font-family: -apple-system, 'Helvetica Neue', Arial, sans-serif; font-size: 14px; color: var(--dark); background: var(--bg); line-height: 1.6; }
+
+  /* ── NAV ── */
+  .sticky-nav {
+    position: sticky; top: 0; z-index: 100;
+    background: var(--white);
+    border-bottom: 1px solid var(--border);
+    padding: 0 32px;
+    display: flex; align-items: center; gap: 4px;
+    box-shadow: 0 1px 6px rgba(0,0,0,.07);
+  }
+  .nav-brand { font-weight: 700; color: var(--orange); font-size: 13px; margin-right: 20px; white-space: nowrap; padding: 14px 0; }
+  .nav-tab { padding: 14px 14px; font-size: 13px; font-weight: 500; color: var(--gray); cursor: pointer; border-bottom: 3px solid transparent; text-decoration: none; white-space: nowrap; transition: color .15s, border-color .15s; }
+  .nav-tab:hover { color: var(--orange); }
+  .nav-tab.active { color: var(--orange); border-bottom-color: var(--orange); }
+  .nav-spacer { flex: 1; }
+  .nav-date { font-size: 12px; color: #999; padding: 14px 0; }
+
+  /* ── HEADER ── */
+  .hero {
+    background: linear-gradient(135deg, #1A1A1A 0%, #2D2D2D 100%);
+    color: white; padding: 48px 40px 40px;
+  }
+  .hero-inner { max-width: 1100px; margin: 0 auto; }
+  .hero-eyebrow { font-size: 11px; font-weight: 600; letter-spacing: .1em; text-transform: uppercase; color: var(--orange); margin-bottom: 10px; }
+  .hero h1 { font-size: 28px; font-weight: 800; line-height: 1.2; margin-bottom: 8px; }
+  .hero-meta { font-size: 13px; color: #aaa; margin-bottom: 32px; }
+  .hero-kpis { display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 16px; }
+  .kpi-card {
+    background: rgba(255,255,255,.07); border: 1px solid rgba(255,255,255,.1);
+    border-radius: 10px; padding: 18px 20px;
+  }
+  .kpi-label { font-size: 11px; font-weight: 600; letter-spacing: .08em; text-transform: uppercase; color: #aaa; margin-bottom: 6px; }
+  .kpi-value { font-size: 26px; font-weight: 800; color: white; line-height: 1; margin-bottom: 4px; }
+  .kpi-delta { font-size: 13px; font-weight: 600; }
+  .kpi-delta.pos { color: #4ADE80; }
+  .kpi-delta.neg { color: #F87171; }
+  .kpi-delta.neu { color: #94A3B8; }
+
+  /* ── LAYOUT ── */
+  .page { max-width: 1100px; margin: 0 auto; padding: 40px 32px; }
+  section { margin-bottom: 52px; }
+  .section-title { font-size: 18px; font-weight: 700; color: var(--dark); margin-bottom: 20px; display: flex; align-items: center; gap: 10px; }
+  .section-title::after { content: ''; flex: 1; height: 1px; background: var(--border); }
+
+  /* ── CHARTS GRID ── */
+  .charts-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-bottom: 32px; }
+  @media (max-width: 760px) { .charts-grid { grid-template-columns: 1fr; } }
+  .chart-card { background: var(--white); border: 1px solid var(--border); border-radius: 10px; padding: 20px 20px 16px; }
+  .chart-title { font-size: 13px; font-weight: 600; color: var(--gray); margin-bottom: 14px; }
+  .chart-wrap { position: relative; height: 240px; }
+
+  /* ── TOP MOVERS TABLE ── */
+  .mover-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 12px; margin-bottom: 24px; }
+  .mover-card {
+    background: var(--white); border: 1px solid var(--border); border-radius: 8px;
+    padding: 14px 16px; cursor: pointer; transition: box-shadow .15s, border-color .15s;
+  }
+  .mover-card:hover { box-shadow: 0 4px 16px rgba(0,0,0,.08); border-color: var(--orange); }
+  .mover-channel { font-size: 13px; font-weight: 700; color: var(--dark); display: flex; align-items: center; gap: 6px; margin-bottom: 6px; }
+  .mover-delta { font-size: 20px; font-weight: 800; }
+  .mover-delta.pos { color: var(--green); }
+  .mover-delta.neg { color: var(--red); }
+  .mover-meta { font-size: 12px; color: var(--gray); margin-top: 3px; }
+
+  /* ── BADGES ── */
+  .badge { display: inline-flex; align-items: center; gap: 3px; font-size: 11px; font-weight: 600; padding: 2px 7px; border-radius: 12px; white-space: nowrap; }
+  .badge-t1 { background: #EFF6FF; color: var(--blue); }
+  .badge-t2 { background: var(--purple-bg); color: var(--purple); }
+  .badge-t3 { background: #F0FDF4; color: #166534; }
+  .badge-explained { background: var(--green-bg); color: var(--green); }
+  .badge-likely { background: #ECFDF5; color: #065F46; }
+  .badge-unexplained { background: var(--red-bg); color: var(--red); }
+  .badge-construction { background: var(--amber-bg); color: var(--amber); }
+  .badge-anomaly { background: var(--red-bg); color: var(--red); }
+
+  /* ── CHANNEL CARDS ── */
+  .channel-card {
+    background: var(--white); border: 1px solid var(--border);
+    border-radius: 10px; margin-bottom: 14px; overflow: hidden;
+    transition: box-shadow .15s;
+  }
+  .channel-card:hover { box-shadow: 0 4px 20px rgba(0,0,0,.06); }
+  .channel-card.anomaly { border-color: #FBBF24; }
+  .channel-header {
+    display: flex; align-items: center; gap: 12px;
+    padding: 16px 20px; cursor: pointer; user-select: none;
+  }
+  .channel-header:hover { background: var(--orange-light); }
+  .ch-name { font-size: 15px; font-weight: 700; flex: 1; }
+  .ch-gms { font-size: 15px; font-weight: 800; }
+  .ch-gms.pos { color: var(--green); }
+  .ch-gms.neg { color: var(--red); }
+  .ch-pct { font-size: 13px; font-weight: 600; padding: 2px 8px; border-radius: 6px; }
+  .ch-pct.pos { background: var(--green-bg); color: var(--green); }
+  .ch-pct.neg { background: var(--red-bg); color: var(--red); }
+  .ch-toggle { width: 24px; height: 24px; display: flex; align-items: center; justify-content: center; color: #999; font-size: 12px; transition: transform .2s; }
+  .channel-card.open .ch-toggle { transform: rotate(180deg); }
+  .channel-body { display: none; padding: 0 20px 20px; border-top: 1px solid var(--border); }
+  .channel-card.open .channel-body { display: block; }
+
+  /* ── METRICS TABLE ── */
+  .metrics-table { width: 100%; border-collapse: collapse; font-size: 13px; margin: 14px 0; }
+  .metrics-table th { background: #F3F4F6; color: var(--gray); font-size: 11px; font-weight: 600; letter-spacing: .06em; text-transform: uppercase; padding: 8px 12px; text-align: left; }
+  .metrics-table td { padding: 8px 12px; border-bottom: 1px solid var(--border); }
+  .metrics-table tr:last-child td { border-bottom: none; }
+  .metrics-table td:first-child { font-weight: 600; color: var(--dark); }
+  .yoy-pos { color: var(--green); font-weight: 700; }
+  .yoy-neg { color: var(--red); font-weight: 700; }
+  .yoy-neu { color: var(--gray); }
+  .anomaly-flag { color: var(--red); font-weight: 700; }
+
+  /* ── DECOMP BAR ── */
+  .decomp-section { margin: 16px 0; }
+  .decomp-label { font-size: 12px; font-weight: 600; color: var(--gray); margin-bottom: 8px; }
+  .decomp-bars { display: flex; gap: 6px; flex-wrap: wrap; }
+  .decomp-bar-item { flex: 1; min-width: 80px; }
+  .decomp-bar-label { font-size: 11px; color: var(--gray); margin-bottom: 3px; text-align: center; }
+  .decomp-bar-track { height: 8px; background: var(--border); border-radius: 4px; overflow: hidden; }
+  .decomp-bar-fill { height: 100%; border-radius: 4px; transition: width .6s ease; }
+  .decomp-bar-fill.pos { background: var(--green); }
+  .decomp-bar-fill.neg { background: var(--red); }
+  .decomp-bar-value { font-size: 11px; font-weight: 700; text-align: center; margin-top: 3px; }
+  .decomp-bar-value.pos { color: var(--green); }
+  .decomp-bar-value.neg { color: var(--red); }
+
+  /* ── ANALYSIS PROSE ── */
+  .analysis-block { margin: 14px 0; }
+  .analysis-block strong { color: var(--dark); }
+  .analysis-block p { color: #444; margin-bottom: 8px; font-size: 13.5px; line-height: 1.65; }
+  .analysis-tag { display: inline-block; font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: .06em; color: var(--orange); margin-bottom: 4px; }
+  .callout { border-radius: 8px; padding: 12px 16px; margin: 12px 0; font-size: 13px; line-height: 1.6; }
+  .callout-warn { background: #FEF3C7; border-left: 4px solid #F59E0B; }
+  .callout-info { background: var(--blue-bg); border-left: 4px solid #3B82F6; }
+  .callout-error { background: var(--red-bg); border-left: 4px solid var(--red); }
+
+  /* ── CONFIDENCE SUMMARY ── */
+  .conf-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; margin-bottom: 20px; }
+  @media (max-width: 700px) { .conf-grid { grid-template-columns: repeat(2, 1fr); } }
+  .conf-card { border-radius: 8px; padding: 14px 16px; text-align: center; }
+  .conf-card .conf-num { font-size: 32px; font-weight: 800; line-height: 1; margin-bottom: 4px; }
+  .conf-card .conf-label { font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: .07em; }
+
+  /* ── FLAGS ── */
+  .flag-list { display: flex; flex-direction: column; gap: 12px; }
+  .flag-item { display: flex; gap: 14px; background: var(--white); border: 1px solid var(--border); border-radius: 8px; padding: 16px 18px; }
+  .flag-item.critical { border-left: 4px solid var(--red); }
+  .flag-item.warn { border-left: 4px solid #F59E0B; }
+  .flag-item.info { border-left: 4px solid #3B82F6; }
+  .flag-icon { font-size: 20px; line-height: 1; flex-shrink: 0; margin-top: 1px; }
+  .flag-content strong { font-size: 14px; color: var(--dark); display: block; margin-bottom: 4px; }
+  .flag-content p { font-size: 13px; color: var(--gray); }
+
+  /* ── PIPELINE BADGE ── */
+  .pipeline-badge { display: inline-flex; align-items: center; gap: 6px; background: var(--amber-bg); color: var(--amber); font-size: 13px; font-weight: 600; padding: 6px 14px; border-radius: 20px; margin-bottom: 16px; }
+  .pipeline-dot { width: 8px; height: 8px; border-radius: 50%; background: currentColor; }
+
+  /* ── SUMMARY TABLE ── */
+  .summary-table { width: 100%; border-collapse: collapse; font-size: 13px; }
+  .summary-table th { background: var(--dark); color: white; font-size: 11px; font-weight: 600; letter-spacing: .07em; text-transform: uppercase; padding: 10px 14px; text-align: left; }
+  .summary-table td { padding: 9px 14px; border-bottom: 1px solid var(--border); }
+  .summary-table tr:hover td { background: var(--orange-light); }
+  .summary-table tr:last-child td { border-bottom: none; }
+  .summary-table td:first-child { font-weight: 600; }
+
+  /* ── FOOTER ── */
+  .footer { border-top: 1px solid var(--border); padding: 24px 0 0; text-align: center; font-size: 12px; color: #aaa; }
+  .footer a { color: var(--orange); text-decoration: none; }
+
+  /* ── TAB SECTIONS ── */
+  .tab-section { display: none; }
+  .tab-section.active { display: block; }
 </style>
 </head>
 <body>
-<div class="header">
-  <div class="container" style="max-width:1100px;margin:0 auto;padding:0;">
-    <h1>Growth Marketing Weekly Review — 2026-05-14</h1>
-    <div class="meta">Review period: 2026-05-07 to 2026-05-13 &nbsp;|&nbsp; Dashboard 9084 &nbsp;|&nbsp; Generated: 2026-05-14</div>
+
+<!-- STICKY NAV -->
+<nav class="sticky-nav" id="main-nav">
+  <span class="nav-brand">Growth Marketing</span>
+  <a class="nav-tab active" href="#" onclick="showTab('summary', this)">Summary</a>
+  <a class="nav-tab" href="#" onclick="showTab('channels', this)">Channels</a>
+  <a class="nav-tab" href="#" onclick="showTab('flags', this)">Flags <span style="background:#EF4444;color:white;font-size:10px;padding:1px 5px;border-radius:8px;margin-left:2px">4</span></a>
+  <span class="nav-spacer"></span>
+  <span class="nav-date">Week of May 7–13, 2026</span>
+</nav>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-inner">
+    <div class="hero-eyebrow">Growth Marketing · Dashboard 9084 · Weekly Review</div>
+    <h1>May 7–13, 2026</h1>
+    <div class="hero-meta">All channels excl. ATL Extension, Other, Seller, ATL · YoY vs. same 7-day period 2025</div>
+    <div class="hero-kpis">
+      <div class="kpi-card">
+        <div class="kpi-label">Total GMS</div>
+        <div class="kpi-value" data-count="63.01" data-suffix="M" data-prefix="$">$0M</div>
+        <div class="kpi-delta pos">+23.6% YoY</div>
+      </div>
+      <div class="kpi-card">
+        <div class="kpi-label">Revenue (Actualized)</div>
+        <div class="kpi-value" data-count="19.00" data-suffix="M" data-prefix="$">$0M</div>
+        <div class="kpi-delta pos">+23.2% YoY</div>
+      </div>
+      <div class="kpi-card">
+        <div class="kpi-label">Total Visits</div>
+        <div class="kpi-value" data-count="74.2" data-suffix="M">0M</div>
+        <div class="kpi-delta pos">+7.9% YoY</div>
+      </div>
+      <div class="kpi-card">
+        <div class="kpi-label">Paid ROAS</div>
+        <div class="kpi-value" data-count="2.357" data-suffix="×">0×</div>
+        <div class="kpi-delta pos">+27.5% YoY</div>
+      </div>
+      <div class="kpi-card">
+        <div class="kpi-label">Total Cost (Paid)</div>
+        <div class="kpi-value" data-count="8.10" data-suffix="M" data-prefix="$">$0M</div>
+        <div class="kpi-delta neg">-3.6% YoY</div>
+      </div>
+      <div class="kpi-card">
+        <div class="kpi-label">Total Receipts</div>
+        <div class="kpi-value" data-count="1.91" data-suffix="M">0M</div>
+        <div class="kpi-delta pos">+12.1% YoY</div>
+      </div>
+    </div>
   </div>
 </div>
-<div class="container">
-<h1>Growth Marketing Weekly Review — 2026-05-14</h1>
 
-<p><strong>Review period:</strong> 2026-05-07 through 2026-05-13 (7 days vs. same period last year)</p>
-<p><strong>Dashboard:</strong> 9084 — Growth Marketing | 2025 OKR Scorecard</p>
-<p><strong>Channels:</strong> All Growth Marketing channels (excl. ATL Extension, Other, Seller, ATL)</p>
-
-<hr>
-
-<h2>Weekly Snapshot</h2>
-
-<p>Growth Marketing delivered <strong>$63.01M</strong> in GMS (+23.6% YoY), with broad-based gains across the portfolio. PLA leads at +$5.67M on visit volume strength, while Display posted the strongest percentage gain (+84.1%) driven by a CVR surge. Three data anomalies require manual follow-up: Paid Social visits are down -66% (same UTM reclassification pattern as April 24), Video visits are up +449% (likely the inverse routing), and SEM Brand spend collapsed -83.6% with GMS down only -19%.</p>
-
-<h3>Top Movers</h3>
-
-<table>
-<tr><td>Channel</td><td>Tier</td><td>GMS $ Delta</td><td>GMS YoY %</td><td>Primary Driver</td><td>Confidence</td></tr>
-<tr><td>PLA</td><td>1</td><td>+$5.67M</td><td>+27.5%</td><td>Visits-driven</td><td>Likely explained</td></tr>
-<tr><td>Display</td><td>1</td><td>+$1.67M</td><td>+84.1%</td><td>Efficiency-driven (CVR)</td><td>Likely explained</td></tr>
-<tr><td>SEM - Non-Brand</td><td>1</td><td>+$1.60M</td><td>+23.5%</td><td>AOV-driven</td><td>Likely explained</td></tr>
-<tr><td>Seo</td><td>1</td><td>+$1.07M</td><td>+8.3%</td><td>AOV/CVR-driven</td><td>Likely explained</td></tr>
-<tr><td>Paid Social</td><td>2</td><td>+$0.90M</td><td>+24.9%</td><td>**Inconsistent (UTM artifact)**</td><td>**Unexplained**</td></tr>
-</table>
-
-<h3>Pipeline Status</h3>
-
-<blockquote><strong>Unknown</strong> — Slack authentication failed this run; pipeline event search could not be completed. Glean search found no pipeline announcements for the review period. Manual check of #olive_garden_analytics recommended.</blockquote>
-
-<h3>Confidence Summary</h3>
-
-<table>
-<tr><td>Label</td><td>Count</td><td>Channels</td></tr>
-<tr><td>Explained</td><td>0</td><td>None</td></tr>
-<tr><td>Likely explained</td><td>9</td><td>PLA, Display, SEM - Non-Brand, Seo, Social Creator Co, Affiliates, Video, SEM - Brand, App\*</td></tr>
-<tr><td>Unexplained</td><td>1</td><td>Paid Social</td></tr>
-<tr><td>Expected by construction</td><td>1</td><td>App</td></tr>
-</table>
-
-<p>\*App labeled "Expected by construction" due to spend-based GMS model; counted under both rows above.</p>
-
-<p><strong>Note:</strong> <code>Explained</code> not achievable this run — BigQuery unavailable (experiment registry) and Slack unavailable (pipeline verification). Maximum achievable confidence without these sources is <code>Likely explained</code>.</p>
-
-<p>→ <strong><a href="#metric-movements-by-channel">Full channel breakdown</a></strong></p>
-
-<hr>
-
-<h2>Metric Movements by Channel</h2>
-
-<h3>PLA — Tier 1</h3>
-<p><strong>GMS: +$5.67M (+27.5%)</strong> | Confidence: <strong>Likely explained</strong></p>
-
-<table>
-<tr><td>Metric</td><td>Current (7d)</td><td>Prior Year (7d)</td><td>YoY</td></tr>
-<tr><td>GMS</td><td>$26.28M</td><td>$20.61M</td><td>**+27.5%**</td></tr>
-<tr><td>Visits</td><td>41.30M</td><td>30.33M</td><td>+36.2%</td></tr>
-<tr><td>CVR</td><td>1.90%</td><td>2.24%</td><td>-15.3%</td></tr>
-<tr><td>AOV</td><td>$33.56</td><td>$30.29</td><td>+10.8%</td></tr>
-<tr><td>Total Cost</td><td>$4.98M</td><td>$4.25M</td><td>+17.2%</td></tr>
-<tr><td>ROAS</td><td>1.831</td><td>1.603</td><td>+14.2%</td></tr>
-<tr><td>ROI</td><td>1.831</td><td>1.603</td><td>+14.2%</td></tr>
-</table>
-
-<p><strong>Decomposition:</strong> Visit growth (+36.2%) is the primary driver, contributing ~+13.5pp to the 27.5% GMS uplift. AOV improvement (+10.8%, $30.29→$33.56) adds ~+11pp. CVR declined 15.3% (2.24%→1.90%) — consistent with higher visit volume at the margin of intent. Net efficiency improved: ROAS +14.2% on +17.2% more spend.</p>
-
-<p><strong>Context:</strong> The completed US PLA Q1 2026 incrementality test (TBR-MM, Feb 3–28) confirmed iROAS of ~1.56 with a 1.15 multiplier, providing indirect confidence that PLA growth is real, not a measurement artifact. Visit growth of 36% outpacing spend growth of 17% suggests efficiency gains from bid strategy optimization.</p>
-
-<p><strong>Seasonal:</strong> Within seasonal norms — PLA has shown consistent YoY gains throughout 2025-2026.</p>
-
-<hr>
-
-<h3>Display — Tier 1</h3>
-<p><strong>GMS: +$1.67M (+84.1%)</strong> | Confidence: <strong>Likely explained</strong></p>
-
-<table>
-<tr><td>Metric</td><td>Current (7d)</td><td>Prior Year (7d)</td><td>YoY</td></tr>
-<tr><td>GMS</td><td>$3.66M</td><td>$1.99M</td><td>**+84.1%**</td></tr>
-<tr><td>Visits</td><td>2.17M</td><td>1.90M</td><td>+14.1%</td></tr>
-<tr><td>CVR</td><td>5.99%</td><td>3.83%</td><td>**+56.2%**</td></tr>
-<tr><td>AOV</td><td>$28.21</td><td>$27.30</td><td>+3.3%</td></tr>
-<tr><td>Total Cost</td><td>$404.9K</td><td>$402.9K</td><td>+0.5%</td></tr>
-<tr><td>ROAS</td><td>1.833</td><td>1.147</td><td>+59.8%</td></tr>
-<tr><td>ROI</td><td>1.776</td><td>1.111</td><td>+59.9%</td></tr>
-</table>
-
-<p><strong>Decomposition:</strong> CVR surge is the dominant driver — from 3.83% to 5.99% (+56.2%), contributing ~+56pp to the 84.1% YoY GMS gain. Visit growth adds ~+13.5pp. Cost was essentially flat (+0.5%), making this a pure efficiency gain. ROAS improved 60%.</p>
-
-<p><strong>Context:</strong> Display has been on a sustained improving trend throughout Q1-Q2 2026. The large CVR increase warrants a check: (a) is this a real conversion rate improvement (creative quality, audience targeting), or (b) a Display holiday multiplier expiry effect from late 2025 that has now anniversary-compared against the lower base? The current 7-day review period is comparing against a period when holiday multipliers may have been lower. This is a likely-explained gain but the magnitude (+84%) is unusual without a confirmed driver.</p>
-
-<p><strong>Seasonal:</strong> Above seasonal norms — Display YoY has been consistently high in 2026.</p>
-
-<hr>
-
-<h3>SEM - Non-Brand — Tier 1</h3>
-<p><strong>GMS: +$1.60M (+23.5%)</strong> | Confidence: <strong>Likely explained</strong></p>
-
-<table>
-<tr><td>Metric</td><td>Current (7d)</td><td>Prior Year (7d)</td><td>YoY</td></tr>
-<tr><td>GMS</td><td>$8.39M</td><td>$6.79M</td><td>**+23.5%**</td></tr>
-<tr><td>Visits</td><td>4.13M</td><td>3.72M</td><td>+11.2%</td></tr>
-<tr><td>CVR</td><td>5.78%</td><td>5.81%</td><td>-0.5%</td></tr>
-<tr><td>AOV</td><td>$35.13</td><td>$31.46</td><td>**+11.7%**</td></tr>
-<tr><td>Total Cost</td><td>$1.52M</td><td>$1.78M</td><td>-14.8%</td></tr>
-<tr><td>ROAS</td><td>1.870</td><td>1.371</td><td>+36.4%</td></tr>
-<tr><td>ROI</td><td>1.870</td><td>1.371</td><td>+36.4%</td></tr>
-</table>
-
-<p><strong>Decomposition:</strong> AOV improvement (+11.7%, $31.46→$35.13) is the primary driver, contributing ~+11.6pp to GMS growth. Visit growth (+11.2%) contributes ~+6pp. CVR is essentially flat (-0.5%). Cost down -14.8% while GMS up +23.5% = ROAS improvement of +36%.</p>
-
-<p><strong>Context:</strong> SEM Non-Brand inhoused in July 2024; both current and prior year periods are post-inhousing, so the cost comparison is methodology-clean. The AOV uplift likely reflects improved query mix or product listing relevance changes. A bidding strategy spreadsheet (Alana Hughes, updated 2026-05-06) was found in Glean — may indicate recent bid target adjustments contributing to efficiency.</p>
-
-<p><strong>Seasonal:</strong> Within seasonal norms.</p>
-
-<hr>
-
-<h3>Seo — Tier 1 (non-paid)</h3>
-<p><strong>GMS: +$1.07M (+8.3%)</strong> | Confidence: <strong>Likely explained</strong></p>
-
-<table>
-<tr><td>Metric</td><td>Current (7d)</td><td>Prior Year (7d)</td><td>YoY</td></tr>
-<tr><td>GMS</td><td>$14.03M</td><td>$12.96M</td><td>**+8.3%**</td></tr>
-<tr><td>Visits</td><td>18.37M</td><td>17.92M</td><td>+2.5%</td></tr>
-<tr><td>CVR</td><td>2.35%</td><td>2.42%</td><td>-2.8%</td></tr>
-<tr><td>AOV</td><td>$32.51</td><td>$29.92</td><td>+8.6%</td></tr>
-</table>
-
-<p><em>Note: ROAS, ROI, and cost not applicable for Seo (non-paid channel).</em></p>
-
-<p><strong>Decomposition:</strong> Visit growth (+2.5%) is insufficient to explain +8.3% GMS — AOV expansion (+8.6%, $29.92→$32.51) is the primary driver. CVR is slightly down (-2.8%).</p>
-
-<p><strong>Context:</strong> Seo growth reflects AOV improvement rather than traffic growth. Consistent with the Etsy-wide AOV trend visible in PLA and SEM Non-Brand. Worth checking if there is a product mix shift (e.g., higher-value items ranking better) or a platform SEO change. Note: <code>_act</code> values for Seo are MTA internal estimates only.</p>
-
-<p><strong>Seasonal:</strong> Below seasonal norms — Seo YoY trends have been declining over the 52-week envelope.</p>
-
-<hr>
-
-<h3>Paid Social — Tier 2 (mixed)</h3>
-<p><strong>GMS: +$0.90M (+24.9%)</strong> | Confidence: <strong>Unexplained</strong></p>
-
-<table>
-<tr><td>Metric</td><td>Current (7d)</td><td>Prior Year (7d)</td><td>YoY</td></tr>
-<tr><td>GMS</td><td>$4.50M</td><td>$3.60M</td><td>**+24.9%**</td></tr>
-<tr><td>Visits</td><td>3.64M</td><td>**10.85M**</td><td>**-66.4%** ⚠️</td></tr>
-<tr><td>CVR</td><td>3.83%</td><td>**1.22%**</td><td>**+214%** ⚠️</td></tr>
-<tr><td>AOV</td><td>$32.21</td><td>$27.21</td><td>+18.4%</td></tr>
-<tr><td>Total Cost</td><td>$542.6K</td><td>$1.18M</td><td>**-54.1%**</td></tr>
-<tr><td>ROAS</td><td>1.800</td><td>0.794</td><td>+126.7%</td></tr>
-</table>
-
-<p><strong>⚠️ ANOMALY — UTM RECLASSIFICATION (CONTINUED):</strong> Visits down -66% while GMS up +25%. CVR tripled (1.22%→3.83%) — this is a mathematical artifact of the attribution reclassification, not real buyer behavior improvement. This same pattern was first flagged in the April 24 report as a UTM taxonomy correction for mid-funnel campaigns. The correction appears to still be active or its effects are persisting in the year-over-year comparison.</p>
-
-<p><strong>Do not interpret CVR or AOV as real signals.</strong> GMS itself may be partially reliable (the reclassification affects visit attribution more than GMS attribution for LF feed placements). Cost drop (-54%) may reflect reduced mid-funnel spend following the reclassification.</p>
-
-<p><strong>Action:</strong> Manual check in #olive_garden_analytics to confirm UTM correction status and whether Paid Social GMS attribution has also been affected.</p>
-
-<hr>
-
-<h3>Social Creator Co — Tier 3</h3>
-<p><strong>GMS: +$0.71M (+79.3%)</strong> | Confidence: <strong>Likely explained</strong></p>
-
-<table>
-<tr><td>Metric</td><td>Current (7d)</td><td>Prior Year (7d)</td><td>YoY</td></tr>
-<tr><td>GMS</td><td>$1.60M</td><td>$0.89M</td><td>**+79.3%**</td></tr>
-<tr><td>Visits</td><td>1.06M</td><td>537.9K</td><td>+97.1%</td></tr>
-<tr><td>Cost</td><td>$130.4K</td><td>$137.4K</td><td>-5.1%</td></tr>
-</table>
-
-<p><em>Note: CVR and AOV are spend-based artifacts for this channel — not reported.</em></p>
-
-<p><strong>Decomposition (Tier 3):</strong> GMS is constructed from spend × static multiplier. Visit growth (+97%) is the primary signal. Cost was essentially flat (-5.1%), so visit volume growth reflects improved content performance or campaign expansion, not spend increase.</p>
-
-<hr>
-
-<h3>Affiliates — Tier 2</h3>
-<p><strong>GMS: +$0.54M (+36.6%)</strong> | Confidence: <strong>Likely explained</strong></p>
-
-<table>
-<tr><td>Metric</td><td>Current (7d)</td><td>Prior Year (7d)</td><td>YoY</td></tr>
-<tr><td>GMS</td><td>$2.03M</td><td>$1.49M</td><td>**+36.6%**</td></tr>
-<tr><td>Visits</td><td>848.7K</td><td>666.8K</td><td>+27.3%</td></tr>
-<tr><td>CVR</td><td>6.83%</td><td>7.11%</td><td>-3.9%</td></tr>
-<tr><td>AOV</td><td>$35.03</td><td>$31.40</td><td>+11.5%</td></tr>
-<tr><td>Cost</td><td>$167.3K</td><td>$132.9K</td><td>+25.9%</td></tr>
-<tr><td>ROAS</td><td>2.950</td><td>2.646</td><td>+11.5%</td></tr>
-</table>
-
-<p><strong>Decomposition:</strong> Visit growth (+27.3%) and AOV improvement (+11.5%) both contribute. CVR slightly down (-3.9%). Note: Affiliates include a 1.03× missing sales correction on GMS — a portion of the improvement may reflect correction mechanics.</p>
-
-<p><strong>Seasonal:</strong> Below seasonal norms — Affiliates YoY has been declining over the 52-week envelope, so this week's strong performance is above recent trend.</p>
-
-<hr>
-
-<h3>Video — Tier 3</h3>
-<p><strong>GMS: +$0.10M (+7.4%)</strong> | Confidence: <strong>Likely explained</strong></p>
-
-<table>
-<tr><td>Metric</td><td>Current (7d)</td><td>Prior Year (7d)</td><td>YoY</td></tr>
-<tr><td>GMS</td><td>$1.49M</td><td>$1.39M</td><td>**+7.4%**</td></tr>
-<tr><td>Visits</td><td>684.8K</td><td>**124.7K**</td><td>**+449%** ⚠️</td></tr>
-<tr><td>Cost</td><td>$271.6K</td><td>$298.2K</td><td>-8.9%</td></tr>
-</table>
-
-<p><strong>⚠️ VISITS ANOMALY:</strong> Video visits +449% is the inverse of the Paid Social visit collapse. This pattern is consistent with the UTM reclassification routing mid-funnel campaign visits away from Paid Social and into Video. GMS growth (+7.4%) is modest despite the visit spike, consistent with Tier 3 spend-based GMS construction (cost -8.9% → slight GMS decline expected, partially offset by other factors). Do not interpret visits as a real signal this week.</p>
-
-<hr>
-
-<h3>SEM - Brand — Tier 2</h3>
-<p><strong>GMS: -$0.15M (-19.4%)</strong> | Confidence: <strong>Likely explained</strong></p>
-
-<table>
-<tr><td>Metric</td><td>Current (7d)</td><td>Prior Year (7d)</td><td>YoY</td></tr>
-<tr><td>GMS</td><td>$635.2K</td><td>$788.0K</td><td>**-19.4%**</td></tr>
-<tr><td>Visits</td><td>1.95M</td><td>2.68M</td><td>-27.3%</td></tr>
-<tr><td>CVR</td><td>1.19%</td><td>1.16%</td><td>+2.5%</td></tr>
-<tr><td>AOV</td><td>$27.34</td><td>$25.27</td><td>+8.2%</td></tr>
-<tr><td>**Total Cost**</td><td>**$23.5K**</td><td>**$143.5K**</td><td>**-83.6%** ⚠️</td></tr>
-<tr><td>ROAS</td><td>8.59</td><td>1.79</td><td>+379% ⚠️</td></tr>
-</table>
-
-<p><strong>⚠️ COST ANOMALY:</strong> SEM Brand spend dropped -83.6% ($143K→$23K) in a single 7-day period. GMS only declined -19.4%, suggesting demand held up on organic brand terms. ROAS appears to have jumped to 8.59× (artifact of near-zero cost denominator). Visit decline of -27.3% is consistent with reduced paid brand traffic.</p>
-
-<p><strong>Context:</strong> Possible explanations: (a) intentional budget reduction to rely on organic brand demand, (b) Smart Bidding strategy change (a bidding sheet was updated May 6 by Alana Hughes), (c) campaign pause or restructure. The efficiency view (GMS -19% on -84% cost) could be interpreted as evidence for approach (a) — brand terms already captured by organic. <strong>Requires manual verification</strong> with the SEM team.</p>
-
-<hr>
-
-<h3>App — Tier 3 (Expected by construction)</h3>
-<p><strong>GMS: -$0.10M (-20.3%)</strong> | Confidence: <strong>Expected by construction</strong></p>
-
-<table>
-<tr><td>Metric</td><td>Current (7d)</td><td>Prior Year (7d)</td><td>YoY</td></tr>
-<tr><td>GMS</td><td>$390.4K</td><td>$490.0K</td><td>**-20.3%**</td></tr>
-<tr><td>Cost</td><td>$65.1K</td><td>$81.7K</td><td>-20.3%</td></tr>
-<tr><td>App Installs (last month)</td><td>2,244,733</td><td>2,270,103</td><td>-1.1%</td></tr>
-</table>
-
-<p><strong>Decomposition (Tier 3):</strong> GMS = $5 × spend. Cost -20.3%, GMS -20.3% — exactly expected by construction. App installs slightly down (-1.1% YoY last month), consistent with the spend reduction.</p>
-
-<hr>
-
-<h2>Total Growth Marketing Summary</h2>
-
-<table>
-<tr><td>Metric</td><td>Current (7d)</td><td>Prior Year (7d)</td><td>YoY</td></tr>
-<tr><td>Total GMS</td><td>**$63.01M**</td><td>$50.99M</td><td>**+23.6%**</td></tr>
-<tr><td>Total Revenue (Actualized)</td><td>$19.00M</td><td>$15.42M</td><td>+23.2%</td></tr>
-<tr><td>Total Visits</td><td>74.16M</td><td>68.73M</td><td>+7.9%</td></tr>
-<tr><td>Total Receipts</td><td>1,911,046</td><td>1,704,519</td><td>+12.1%</td></tr>
-<tr><td>New Buyer Receipts</td><td>179,469</td><td>168,240</td><td>+6.7%</td></tr>
-<tr><td>Lapsed Buyer Receipts</td><td>240,740</td><td>207,490</td><td>+16.0%</td></tr>
-<tr><td>Total Cost (Paid)</td><td>$8.10M</td><td>$8.41M</td><td>**-3.6%**</td></tr>
-<tr><td>Paid ROAS</td><td>2.357</td><td>1.848</td><td>**+27.5%**</td></tr>
-<tr><td>Paid ROI</td><td>2.345</td><td>1.834</td><td>**+27.9%**</td></tr>
-<tr><td>App Installs (last month)</td><td>2,244,733</td><td>2,270,103</td><td>-1.1%</td></tr>
-</table>
-
-<p><strong>Portfolio efficiency improved sharply:</strong> -3.6% spend with +23.6% GMS = ROAS up +27.5%. This is partially driven by SEM Brand cost collapse (-83.6%), which artificially inflates the total-portfolio ROAS. Excluding SEM Brand, cost change and efficiency gains are still meaningfully positive.</p>
-
-<hr>
-
-<h2>Active Experiments (Review Period)</h2>
-
-<table>
-<tr><td>Experiment</td><td>Channel</td><td>Status</td><td>iROAS</td><td>CI</td><td>Notes</td></tr>
-</table>
-
-<p><strong>No active experiments during May 7–13 review period.</strong> The most recent test on record (US PLA Q1 2026, TBR-MM Go Dark) completed its cooldown on Feb 28, 2026 with iROAS 1.50–1.56, confirming PLA is incremental. BigQuery unavailable this run; experiment registry not queried directly.</p>
-
-<hr>
-
-<h2>Flags for Manual Review</h2>
-
-<ol>
-<li><strong>⚠️ SEM Brand cost -83.6%</strong> ($143K→$23K): Requires verification with SEM team. Possible budget cut, campaign pause, or Smart Bidding restructure (bidding sheet updated May 6 by Alana Hughes).</li>
-</ul>
-
-<ol>
-<li><strong>⚠️ Paid Social visit anomaly continuing:</strong> Visits -66% (10.8M→3.6M) persisting from the April 24 UTM reclassification. GMS may also be partially affected. Confirm current status with #olive_garden_analytics.</li>
-</ul>
-
-<ol>
-<li><strong>⚠️ Video visit anomaly (inverse):</strong> Visits +449% (125K→685K). Likely receiving visits rerouted from Paid Social. Do not report as organic growth.</li>
-</ul>
-
-<ol>
-<li><strong>⚠️ Slack authentication failed:</strong> Pipeline events could not be verified. #olive_garden_analytics manual check required.</li>
-</ul>
-
-<ol>
-<li><strong>ℹ️ Display +84.1% warrants investigation:</strong> Large CVR jump (3.83%→5.99%) — verify whether this reflects real conversion improvement or base-period comparison effect (e.g., holiday multiplier expiry anniversary).</li>
-</ul>
-
-<ol>
-<li><strong>ℹ️ BigQuery unavailable:</strong> Experiment registry not queried. <code>Explained</code> confidence not achievable. Max confidence = <code>Likely explained</code>.</li>
-</ul>
-
-<ol>
-<li><strong>ℹ️ CQ-18 trend lag:</strong> Most recent trend week is 2026-05-04 (10 days ago). Seasonal and anomaly scores are relative to prior week, not the current period.</li>
-</ul>
-
-<hr>
-
-<p><em>Report generated: 2026-05-14 | Skill: analyze-dashboard | Dashboard: 9084</em></p>
-
-<div class="footer">Generated by analyze-dashboard skill &middot; Dashboard 9084 &middot; 2026-05-14</div>
-</div>
+<!-- PAGE -->
+<div class="page">
+
+  <!-- ═══ SUMMARY TAB ═══ -->
+  <div class="tab-section active" id="tab-summary">
+
+    <!-- Pipeline status -->
+    <div style="margin-bottom:28px;margin-top:8px;">
+      <span class="pipeline-badge"><span class="pipeline-dot"></span> Pipeline: Unknown — Slack auth failed · Manual check #olive_garden_analytics</span>
+    </div>
+
+    <!-- Charts -->
+    <section>
+      <div class="section-title">GMS by Channel</div>
+      <div class="charts-grid">
+        <div class="chart-card">
+          <div class="chart-title">GMS Contribution vs. Prior Year ($M)</div>
+          <div class="chart-wrap"><canvas id="chart-gms"></canvas></div>
+        </div>
+        <div class="chart-card">
+          <div class="chart-title">YoY% by Channel</div>
+          <div class="chart-wrap"><canvas id="chart-yoy"></canvas></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Top movers -->
+    <section>
+      <div class="section-title">Top Movers — Click to Jump to Channel</div>
+      <div class="mover-grid">
+        <div class="mover-card" onclick="jumpToChannel('pla')">
+          <div class="mover-channel"><span class="badge badge-t1">T1</span> PLA</div>
+          <div class="mover-delta pos">+$5.67M</div>
+          <div class="mover-meta">+27.5% YoY · Visits-driven</div>
+        </div>
+        <div class="mover-card" onclick="jumpToChannel('display')">
+          <div class="mover-channel"><span class="badge badge-t1">T1</span> Display</div>
+          <div class="mover-delta pos">+$1.67M</div>
+          <div class="mover-meta">+84.1% YoY · CVR-driven</div>
+        </div>
+        <div class="mover-card" onclick="jumpToChannel('semnb')">
+          <div class="mover-channel"><span class="badge badge-t1">T1</span> SEM Non-Brand</div>
+          <div class="mover-delta pos">+$1.60M</div>
+          <div class="mover-meta">+23.5% YoY · AOV-driven</div>
+        </div>
+        <div class="mover-card" onclick="jumpToChannel('seo')">
+          <div class="mover-channel"><span class="badge badge-t1">T1</span> Seo</div>
+          <div class="mover-delta pos">+$1.07M</div>
+          <div class="mover-meta">+8.3% YoY · AOV-driven</div>
+        </div>
+        <div class="mover-card anomaly" onclick="jumpToChannel('paidsocial')" style="border-color:#FBBF24">
+          <div class="mover-channel"><span class="badge badge-t2">T2</span> Paid Social <span class="badge badge-anomaly">⚠ Anomaly</span></div>
+          <div class="mover-delta pos">+$0.90M</div>
+          <div class="mover-meta" style="color:var(--red)">UTM reclassification · Unexplained</div>
+        </div>
+        <div class="mover-card" onclick="jumpToChannel('socialco')">
+          <div class="mover-channel"><span class="badge badge-t3">T3</span> Social Creator Co</div>
+          <div class="mover-delta pos">+$0.71M</div>
+          <div class="mover-meta">+79.3% YoY · Visit-driven</div>
+        </div>
+        <div class="mover-card" onclick="jumpToChannel('affiliates')">
+          <div class="mover-channel"><span class="badge badge-t2">T2</span> Affiliates</div>
+          <div class="mover-delta pos">+$0.54M</div>
+          <div class="mover-meta">+36.6% YoY · Visits + AOV</div>
+        </div>
+        <div class="mover-card" onclick="jumpToChannel('sembrand')" style="border-color:#FBBF24">
+          <div class="mover-channel"><span class="badge badge-t2">T2</span> SEM Brand <span class="badge badge-anomaly">⚠ Cost</span></div>
+          <div class="mover-delta neg">-$0.15M</div>
+          <div class="mover-meta" style="color:var(--red)">-83.6% spend · Manual review</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Confidence summary -->
+    <section>
+      <div class="section-title">Confidence Summary</div>
+      <div class="conf-grid">
+        <div class="conf-card" style="background:var(--green-bg);">
+          <div class="conf-num" style="color:var(--green)">0</div>
+          <div class="conf-label" style="color:var(--green)">Explained</div>
+        </div>
+        <div class="conf-card" style="background:#ECFDF5;">
+          <div class="conf-num" style="color:#065F46">9</div>
+          <div class="conf-label" style="color:#065F46">Likely Explained</div>
+        </div>
+        <div class="conf-card" style="background:var(--red-bg);">
+          <div class="conf-num" style="color:var(--red)">1</div>
+          <div class="conf-label" style="color:var(--red)">Unexplained</div>
+        </div>
+        <div class="conf-card" style="background:var(--amber-bg);">
+          <div class="conf-num" style="color:var(--amber)">1</div>
+          <div class="conf-label" style="color:var(--amber)">By Construction</div>
+        </div>
+      </div>
+      <div class="callout callout-info">
+        <strong>Note:</strong> <em>Explained</em> confidence not achievable this run — BigQuery (experiment registry) and Slack (pipeline verification) were both unavailable. Maximum achievable confidence = <em>Likely explained</em>.
+      </div>
+    </section>
+
+    <!-- Portfolio summary table -->
+    <section>
+      <div class="section-title">Portfolio Summary</div>
+      <table class="summary-table">
+        <thead>
+          <tr><th>Metric</th><th>Current (7d)</th><th>Prior Year (7d)</th><th>YoY</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>Total GMS</td><td><strong>$63.01M</strong></td><td>$50.99M</td><td class="yoy-pos">+23.6%</td></tr>
+          <tr><td>Total Revenue (Actualized)</td><td>$19.00M</td><td>$15.42M</td><td class="yoy-pos">+23.2%</td></tr>
+          <tr><td>Total Visits</td><td>74.16M</td><td>68.73M</td><td class="yoy-pos">+7.9%</td></tr>
+          <tr><td>Total Receipts</td><td>1,911,046</td><td>1,704,519</td><td class="yoy-pos">+12.1%</td></tr>
+          <tr><td>New Buyer Receipts</td><td>179,469</td><td>168,240</td><td class="yoy-pos">+6.7%</td></tr>
+          <tr><td>Lapsed Buyer Receipts</td><td>240,740</td><td>207,490</td><td class="yoy-pos">+16.0%</td></tr>
+          <tr><td>Total Cost (Paid)</td><td>$8.10M</td><td>$8.41M</td><td class="yoy-neg">-3.6%</td></tr>
+          <tr><td>Paid ROAS</td><td><strong>2.357</strong></td><td>1.848</td><td class="yoy-pos">+27.5%</td></tr>
+          <tr><td>Paid ROI</td><td>2.345</td><td>1.834</td><td class="yoy-pos">+27.9%</td></tr>
+          <tr><td>App Installs (last month)</td><td>2,244,733</td><td>2,270,103</td><td class="yoy-neg">-1.1%</td></tr>
+        </tbody>
+      </table>
+      <p style="font-size:12px;color:var(--gray);margin-top:8px;">Portfolio efficiency note: ROAS uplift (+27.5%) is partially driven by SEM Brand cost collapse (-83.6%), which artificially reduces the cost base. Excluding SEM Brand, efficiency gains are still meaningfully positive.</p>
+    </section>
+
+  </div><!-- /tab-summary -->
+
+
+  <!-- ═══ CHANNELS TAB ═══ -->
+  <div class="tab-section" id="tab-channels">
+
+    <div style="margin-bottom:20px;margin-top:8px;">
+      <p style="font-size:13px;color:var(--gray)">Click any channel header to expand. Channels sorted by GMS delta contribution.</p>
+    </div>
+
+    <!-- PLA -->
+    <div class="channel-card open" id="ch-pla">
+      <div class="channel-header" onclick="toggleChannel(this)">
+        <span class="badge badge-t1">Tier 1</span>
+        <span class="ch-name">PLA</span>
+        <span class="ch-gms pos">+$5.67M</span>
+        <span class="ch-pct pos">+27.5%</span>
+        <span class="badge badge-likely">Likely explained</span>
+        <span class="ch-toggle">▼</span>
+      </div>
+      <div class="channel-body">
+        <table class="metrics-table">
+          <thead><tr><th>Metric</th><th>Current (7d)</th><th>Prior Year (7d)</th><th>YoY</th></tr></thead>
+          <tbody>
+            <tr><td>GMS</td><td>$26.28M</td><td>$20.61M</td><td class="yoy-pos">+27.5%</td></tr>
+            <tr><td>Visits</td><td>41.30M</td><td>30.33M</td><td class="yoy-pos">+36.2%</td></tr>
+            <tr><td>CVR</td><td>1.90%</td><td>2.24%</td><td class="yoy-neg">-15.3%</td></tr>
+            <tr><td>AOV</td><td>$33.56</td><td>$30.29</td><td class="yoy-pos">+10.8%</td></tr>
+            <tr><td>Total Cost</td><td>$4.98M</td><td>$4.25M</td><td class="yoy-pos">+17.2%</td></tr>
+            <tr><td>ROAS</td><td>1.831</td><td>1.603</td><td class="yoy-pos">+14.2%</td></tr>
+          </tbody>
+        </table>
+        <div class="decomp-section">
+          <div class="decomp-label">GMS DECOMPOSITION — CONTRIBUTIONS TO +27.5% YoY</div>
+          <div class="decomp-bars">
+            <div class="decomp-bar-item">
+              <div class="decomp-bar-label">Visits</div>
+              <div class="decomp-bar-track"><div class="decomp-bar-fill pos" style="width:49%"></div></div>
+              <div class="decomp-bar-value pos">+13.5pp</div>
+            </div>
+            <div class="decomp-bar-item">
+              <div class="decomp-bar-label">AOV</div>
+              <div class="decomp-bar-track"><div class="decomp-bar-fill pos" style="width:40%"></div></div>
+              <div class="decomp-bar-value pos">+11pp</div>
+            </div>
+            <div class="decomp-bar-item">
+              <div class="decomp-bar-label">CVR</div>
+              <div class="decomp-bar-track"><div class="decomp-bar-fill neg" style="width:30%"></div></div>
+              <div class="decomp-bar-value neg">-15.3pp</div>
+            </div>
+          </div>
+        </div>
+        <div class="analysis-block">
+          <p><strong>Driver:</strong> Visit growth (+36.2%) is primary, contributing ~+13.5pp. AOV improvement (+10.8%, $30.29→$33.56) adds ~+11pp. CVR declined -15.3% (2.24%→1.90%) — consistent with higher visit volume at the margin of intent.</p>
+          <p><strong>Context:</strong> Completed US PLA Q1 2026 incrementality test (TBR-MM, Feb 3–28) confirmed iROAS ~1.56 with a 1.15 multiplier. Visit growth of 36% outpacing spend growth of 17% suggests efficiency gains from bid strategy optimization.</p>
+          <p><strong>Seasonal:</strong> Within seasonal norms — PLA has shown consistent YoY gains throughout 2025–2026.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Display -->
+    <div class="channel-card" id="ch-display">
+      <div class="channel-header" onclick="toggleChannel(this)">
+        <span class="badge badge-t1">Tier 1</span>
+        <span class="ch-name">Display</span>
+        <span class="ch-gms pos">+$1.67M</span>
+        <span class="ch-pct pos">+84.1%</span>
+        <span class="badge badge-likely">Likely explained</span>
+        <span class="ch-toggle">▼</span>
+      </div>
+      <div class="channel-body">
+        <table class="metrics-table">
+          <thead><tr><th>Metric</th><th>Current (7d)</th><th>Prior Year (7d)</th><th>YoY</th></tr></thead>
+          <tbody>
+            <tr><td>GMS</td><td>$3.66M</td><td>$1.99M</td><td class="yoy-pos">+84.1%</td></tr>
+            <tr><td>Visits</td><td>2.17M</td><td>1.90M</td><td class="yoy-pos">+14.1%</td></tr>
+            <tr><td>CVR</td><td>5.99%</td><td>3.83%</td><td class="yoy-pos">+56.2% ★</td></tr>
+            <tr><td>AOV</td><td>$28.21</td><td>$27.30</td><td class="yoy-pos">+3.3%</td></tr>
+            <tr><td>Total Cost</td><td>$404.9K</td><td>$402.9K</td><td class="yoy-neu">+0.5%</td></tr>
+            <tr><td>ROAS</td><td>1.833</td><td>1.147</td><td class="yoy-pos">+59.8%</td></tr>
+          </tbody>
+        </table>
+        <div class="decomp-section">
+          <div class="decomp-label">GMS DECOMPOSITION — CONTRIBUTIONS TO +84.1% YoY</div>
+          <div class="decomp-bars">
+            <div class="decomp-bar-item">
+              <div class="decomp-bar-label">CVR</div>
+              <div class="decomp-bar-track"><div class="decomp-bar-fill pos" style="width:100%"></div></div>
+              <div class="decomp-bar-value pos">+56pp (dominant)</div>
+            </div>
+            <div class="decomp-bar-item">
+              <div class="decomp-bar-label">Visits</div>
+              <div class="decomp-bar-track"><div class="decomp-bar-fill pos" style="width:24%"></div></div>
+              <div class="decomp-bar-value pos">+13.5pp</div>
+            </div>
+            <div class="decomp-bar-item">
+              <div class="decomp-bar-label">AOV</div>
+              <div class="decomp-bar-track"><div class="decomp-bar-fill pos" style="width:6%"></div></div>
+              <div class="decomp-bar-value pos">+3.3pp</div>
+            </div>
+          </div>
+        </div>
+        <div class="callout callout-info">
+          <strong>Investigation needed:</strong> CVR surge from 3.83%→5.99% (+56%). Is this (a) real conversion improvement from creative/audience quality, or (b) a base-period comparison effect from holiday multiplier expiry in late 2025? The magnitude (+84%) is unusual without a confirmed driver.
+        </div>
+        <div class="analysis-block">
+          <p><strong>Seasonal:</strong> Above seasonal norms — Display YoY has been consistently high in 2026. Pure efficiency gain: cost was essentially flat (+0.5%), ROAS improved +60%.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- SEM Non-Brand -->
+    <div class="channel-card" id="ch-semnb">
+      <div class="channel-header" onclick="toggleChannel(this)">
+        <span class="badge badge-t1">Tier 1</span>
+        <span class="ch-name">SEM Non-Brand</span>
+        <span class="ch-gms pos">+$1.60M</span>
+        <span class="ch-pct pos">+23.5%</span>
+        <span class="badge badge-likely">Likely explained</span>
+        <span class="ch-toggle">▼</span>
+      </div>
+      <div class="channel-body">
+        <table class="metrics-table">
+          <thead><tr><th>Metric</th><th>Current (7d)</th><th>Prior Year (7d)</th><th>YoY</th></tr></thead>
+          <tbody>
+            <tr><td>GMS</td><td>$8.39M</td><td>$6.79M</td><td class="yoy-pos">+23.5%</td></tr>
+            <tr><td>Visits</td><td>4.13M</td><td>3.72M</td><td class="yoy-pos">+11.2%</td></tr>
+            <tr><td>CVR</td><td>5.78%</td><td>5.81%</td><td class="yoy-neu">-0.5%</td></tr>
+            <tr><td>AOV</td><td>$35.13</td><td>$31.46</td><td class="yoy-pos">+11.7% ★</td></tr>
+            <tr><td>Total Cost</td><td>$1.52M</td><td>$1.78M</td><td class="yoy-neg">-14.8%</td></tr>
+            <tr><td>ROAS</td><td>1.870</td><td>1.371</td><td class="yoy-pos">+36.4%</td></tr>
+          </tbody>
+        </table>
+        <div class="analysis-block">
+          <p><strong>Driver:</strong> AOV improvement (+11.7%, $31.46→$35.13) is primary (~+11.6pp). Visit growth (+11.2%) contributes ~+6pp. CVR flat (-0.5%). Cost down -14.8% while GMS up +23.5% = ROAS improvement of +36%.</p>
+          <p><strong>Context:</strong> SEM Non-Brand inhoused in July 2024; both periods are post-inhousing so the cost comparison is methodology-clean. A bidding strategy spreadsheet (Alana Hughes, updated 2026-05-06) found in Glean may indicate recent bid target adjustments contributing to efficiency.</p>
+          <p><strong>Seasonal:</strong> Within seasonal norms.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Seo -->
+    <div class="channel-card" id="ch-seo">
+      <div class="channel-header" onclick="toggleChannel(this)">
+        <span class="badge badge-t1">Tier 1</span>
+        <span class="ch-name">Seo (non-paid)</span>
+        <span class="ch-gms pos">+$1.07M</span>
+        <span class="ch-pct pos">+8.3%</span>
+        <span class="badge badge-likely">Likely explained</span>
+        <span class="ch-toggle">▼</span>
+      </div>
+      <div class="channel-body">
+        <table class="metrics-table">
+          <thead><tr><th>Metric</th><th>Current (7d)</th><th>Prior Year (7d)</th><th>YoY</th></tr></thead>
+          <tbody>
+            <tr><td>GMS</td><td>$14.03M</td><td>$12.96M</td><td class="yoy-pos">+8.3%</td></tr>
+            <tr><td>Visits</td><td>18.37M</td><td>17.92M</td><td class="yoy-pos">+2.5%</td></tr>
+            <tr><td>CVR</td><td>2.35%</td><td>2.42%</td><td class="yoy-neg">-2.8%</td></tr>
+            <tr><td>AOV</td><td>$32.51</td><td>$29.92</td><td class="yoy-pos">+8.6%</td></tr>
+          </tbody>
+        </table>
+        <p style="font-size:12px;color:var(--gray);margin:8px 0">ROAS, ROI, and cost not applicable — non-paid channel. <code>_act</code> values are MTA internal estimates only.</p>
+        <div class="analysis-block">
+          <p><strong>Driver:</strong> Visit growth (+2.5%) is insufficient to explain +8.3% GMS — AOV expansion (+8.6%, $29.92→$32.51) is primary. CVR slightly down (-2.8%). Consistent with Etsy-wide AOV trend visible in PLA and SEM Non-Brand.</p>
+          <p><strong>Seasonal:</strong> Below seasonal norms — Seo YoY trends have been declining over the 52-week envelope.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Paid Social -->
+    <div class="channel-card anomaly" id="ch-paidsocial">
+      <div class="channel-header" onclick="toggleChannel(this)">
+        <span class="badge badge-t2">Tier 2</span>
+        <span class="ch-name">Paid Social</span>
+        <span class="ch-gms pos">+$0.90M</span>
+        <span class="ch-pct pos">+24.9%</span>
+        <span class="badge badge-unexplained">⚠ Unexplained</span>
+        <span class="ch-toggle">▼</span>
+      </div>
+      <div class="channel-body">
+        <table class="metrics-table">
+          <thead><tr><th>Metric</th><th>Current (7d)</th><th>Prior Year (7d)</th><th>YoY</th></tr></thead>
+          <tbody>
+            <tr><td>GMS</td><td>$4.50M</td><td>$3.60M</td><td class="yoy-pos">+24.9%</td></tr>
+            <tr><td>Visits</td><td>3.64M</td><td>10.85M</td><td class="anomaly-flag">-66.4% ⚠</td></tr>
+            <tr><td>CVR</td><td>3.83%</td><td>1.22%</td><td class="anomaly-flag">+214% ⚠ (artifact)</td></tr>
+            <tr><td>AOV</td><td>$32.21</td><td>$27.21</td><td class="yoy-pos">+18.4%</td></tr>
+            <tr><td>Total Cost</td><td>$542.6K</td><td>$1.18M</td><td class="yoy-neg">-54.1%</td></tr>
+            <tr><td>ROAS</td><td>1.800</td><td>0.794</td><td class="yoy-pos">+126.7%</td></tr>
+          </tbody>
+        </table>
+        <div class="callout callout-error">
+          <strong>⚠ UTM Reclassification (Continuing from April 24):</strong> Visits down -66% while GMS is up +25%. CVR tripled — a mathematical artifact of attribution reclassification, not real buyer behavior. Do not interpret CVR or visit count as real signals.
+        </div>
+        <div class="analysis-block">
+          <p><strong>Action required:</strong> Manual check in #olive_garden_analytics to confirm UTM correction status and whether Paid Social GMS attribution has also been affected. GMS itself may be partially reliable (reclassification affects visit attribution more than GMS attribution for LF feed placements).</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Social Creator Co -->
+    <div class="channel-card" id="ch-socialco">
+      <div class="channel-header" onclick="toggleChannel(this)">
+        <span class="badge badge-t3">Tier 3</span>
+        <span class="ch-name">Social Creator Co</span>
+        <span class="ch-gms pos">+$0.71M</span>
+        <span class="ch-pct pos">+79.3%</span>
+        <span class="badge badge-likely">Likely explained</span>
+        <span class="ch-toggle">▼</span>
+      </div>
+      <div class="channel-body">
+        <table class="metrics-table">
+          <thead><tr><th>Metric</th><th>Current (7d)</th><th>Prior Year (7d)</th><th>YoY</th></tr></thead>
+          <tbody>
+            <tr><td>GMS</td><td>$1.60M</td><td>$0.89M</td><td class="yoy-pos">+79.3%</td></tr>
+            <tr><td>Visits</td><td>1.06M</td><td>537.9K</td><td class="yoy-pos">+97.1%</td></tr>
+            <tr><td>Cost</td><td>$130.4K</td><td>$137.4K</td><td class="yoy-neg">-5.1%</td></tr>
+          </tbody>
+        </table>
+        <p style="font-size:12px;color:var(--gray);margin:8px 0">CVR and AOV are spend-based artifacts — not reported for Tier 3.</p>
+        <div class="analysis-block">
+          <p><strong>Driver:</strong> GMS is constructed from spend × static multiplier. Visit growth (+97%) is the primary signal. Cost was essentially flat (-5.1%), so visit volume growth reflects improved content performance or campaign expansion — not additional spend.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Affiliates -->
+    <div class="channel-card" id="ch-affiliates">
+      <div class="channel-header" onclick="toggleChannel(this)">
+        <span class="badge badge-t2">Tier 2</span>
+        <span class="ch-name">Affiliates</span>
+        <span class="ch-gms pos">+$0.54M</span>
+        <span class="ch-pct pos">+36.6%</span>
+        <span class="badge badge-likely">Likely explained</span>
+        <span class="ch-toggle">▼</span>
+      </div>
+      <div class="channel-body">
+        <table class="metrics-table">
+          <thead><tr><th>Metric</th><th>Current (7d)</th><th>Prior Year (7d)</th><th>YoY</th></tr></thead>
+          <tbody>
+            <tr><td>GMS</td><td>$2.03M</td><td>$1.49M</td><td class="yoy-pos">+36.6%</td></tr>
+            <tr><td>Visits</td><td>848.7K</td><td>666.8K</td><td class="yoy-pos">+27.3%</td></tr>
+            <tr><td>CVR</td><td>6.83%</td><td>7.11%</td><td class="yoy-neg">-3.9%</td></tr>
+            <tr><td>AOV</td><td>$35.03</td><td>$31.40</td><td class="yoy-pos">+11.5%</td></tr>
+            <tr><td>Cost</td><td>$167.3K</td><td>$132.9K</td><td class="yoy-pos">+25.9%</td></tr>
+            <tr><td>ROAS</td><td>2.950</td><td>2.646</td><td class="yoy-pos">+11.5%</td></tr>
+          </tbody>
+        </table>
+        <div class="analysis-block">
+          <p><strong>Driver:</strong> Visit growth (+27.3%) and AOV improvement (+11.5%) both contribute. CVR slightly down (-3.9%). Note: Affiliates include a 1.03× missing sales correction on GMS — a portion of the improvement may reflect correction mechanics.</p>
+          <p><strong>Seasonal:</strong> Below seasonal norms — Affiliates YoY has been declining over the 52-week envelope, so this week's performance is above recent trend.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Video -->
+    <div class="channel-card anomaly" id="ch-video">
+      <div class="channel-header" onclick="toggleChannel(this)">
+        <span class="badge badge-t3">Tier 3</span>
+        <span class="ch-name">Video</span>
+        <span class="ch-gms pos">+$0.10M</span>
+        <span class="ch-pct pos">+7.4%</span>
+        <span class="badge badge-likely">Likely explained</span>
+        <span class="ch-toggle">▼</span>
+      </div>
+      <div class="channel-body">
+        <table class="metrics-table">
+          <thead><tr><th>Metric</th><th>Current (7d)</th><th>Prior Year (7d)</th><th>YoY</th></tr></thead>
+          <tbody>
+            <tr><td>GMS</td><td>$1.49M</td><td>$1.39M</td><td class="yoy-pos">+7.4%</td></tr>
+            <tr><td>Visits</td><td>684.8K</td><td>124.7K</td><td class="anomaly-flag">+449% ⚠ (artifact)</td></tr>
+            <tr><td>Cost</td><td>$271.6K</td><td>$298.2K</td><td class="yoy-neg">-8.9%</td></tr>
+          </tbody>
+        </table>
+        <div class="callout callout-warn">
+          <strong>⚠ Visits Anomaly:</strong> Video visits +449% is the inverse of the Paid Social visit collapse. Consistent with UTM reclassification routing mid-funnel visits away from Paid Social and into Video. GMS growth (+7.4%) is modest despite the spike — consistent with Tier 3 spend-based GMS construction. Do not interpret visits as a real signal this week.
+        </div>
+      </div>
+    </div>
+
+    <!-- SEM Brand -->
+    <div class="channel-card anomaly" id="ch-sembrand">
+      <div class="channel-header" onclick="toggleChannel(this)">
+        <span class="badge badge-t2">Tier 2</span>
+        <span class="ch-name">SEM Brand</span>
+        <span class="ch-gms neg">-$0.15M</span>
+        <span class="ch-pct neg">-19.4%</span>
+        <span class="badge badge-likely">Likely explained</span>
+        <span class="ch-toggle">▼</span>
+      </div>
+      <div class="channel-body">
+        <table class="metrics-table">
+          <thead><tr><th>Metric</th><th>Current (7d)</th><th>Prior Year (7d)</th><th>YoY</th></tr></thead>
+          <tbody>
+            <tr><td>GMS</td><td>$635.2K</td><td>$788.0K</td><td class="yoy-neg">-19.4%</td></tr>
+            <tr><td>Visits</td><td>1.95M</td><td>2.68M</td><td class="yoy-neg">-27.3%</td></tr>
+            <tr><td>CVR</td><td>1.19%</td><td>1.16%</td><td class="yoy-pos">+2.5%</td></tr>
+            <tr><td>AOV</td><td>$27.34</td><td>$25.27</td><td class="yoy-pos">+8.2%</td></tr>
+            <tr><td>Total Cost</td><td>$23.5K</td><td>$143.5K</td><td class="anomaly-flag">-83.6% ⚠</td></tr>
+            <tr><td>ROAS</td><td>8.59</td><td>1.79</td><td class="anomaly-flag">+379% ⚠ (artifact)</td></tr>
+          </tbody>
+        </table>
+        <div class="callout callout-error">
+          <strong>⚠ Cost Anomaly:</strong> SEM Brand spend dropped -83.6% ($143K→$23K) in a single 7-day period. ROAS of 8.59× is an artifact of near-zero cost denominator — do not report as real efficiency. GMS only declined -19.4%, suggesting demand held on organic brand terms.
+        </div>
+        <div class="analysis-block">
+          <p><strong>Possible explanations:</strong> (a) Intentional budget reduction relying on organic brand demand; (b) Smart Bidding strategy change — a bidding sheet was updated May 6 by Alana Hughes; (c) campaign pause or restructure. Requires manual verification with the SEM team.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- App -->
+    <div class="channel-card" id="ch-app">
+      <div class="channel-header" onclick="toggleChannel(this)">
+        <span class="badge badge-t3">Tier 3</span>
+        <span class="ch-name">App</span>
+        <span class="ch-gms neg">-$0.10M</span>
+        <span class="ch-pct neg">-20.3%</span>
+        <span class="badge badge-construction">By Construction</span>
+        <span class="ch-toggle">▼</span>
+      </div>
+      <div class="channel-body">
+        <table class="metrics-table">
+          <thead><tr><th>Metric</th><th>Current (7d)</th><th>Prior Year (7d)</th><th>YoY</th></tr></thead>
+          <tbody>
+            <tr><td>GMS</td><td>$390.4K</td><td>$490.0K</td><td class="yoy-neg">-20.3%</td></tr>
+            <tr><td>Cost</td><td>$65.1K</td><td>$81.7K</td><td class="yoy-neg">-20.3%</td></tr>
+            <tr><td>App Installs (last month)</td><td>2,244,733</td><td>2,270,103</td><td class="yoy-neg">-1.1%</td></tr>
+          </tbody>
+        </table>
+        <div class="analysis-block">
+          <p><strong>Decomposition (Tier 3):</strong> GMS = $5 × spend. Cost -20.3%, GMS -20.3% — exactly expected by construction. App installs slightly down (-1.1% YoY last month), consistent with the spend reduction.</p>
+        </div>
+      </div>
+    </div>
+
+  </div><!-- /tab-channels -->
+
+
+  <!-- ═══ FLAGS TAB ═══ -->
+  <div class="tab-section" id="tab-flags">
+
+    <div style="margin:8px 0 28px">
+      <p style="font-size:13px;color:var(--gray)">Items requiring manual follow-up before publishing results.</p>
+    </div>
+
+    <div class="flag-list">
+      <div class="flag-item critical">
+        <div class="flag-icon">🚨</div>
+        <div class="flag-content">
+          <strong>SEM Brand cost -83.6% ($143K→$23K)</strong>
+          <p>Requires verification with SEM team. Possible budget cut, campaign pause, or Smart Bidding restructure. A bidding strategy spreadsheet was updated May 6 by Alana Hughes (Performance Marketing). GMS only -19%, suggesting organic brand terms are holding demand.</p>
+        </div>
+      </div>
+      <div class="flag-item critical">
+        <div class="flag-icon">🚨</div>
+        <div class="flag-content">
+          <strong>Paid Social visit anomaly continuing (from April 24)</strong>
+          <p>Visits -66% (10.8M→3.6M) persisting from the UTM reclassification first flagged April 24. CVR tripling is a mathematical artifact. GMS may also be partially affected. Confirm current UTM correction status in #olive_garden_analytics.</p>
+        </div>
+      </div>
+      <div class="flag-item warn">
+        <div class="flag-icon">⚠️</div>
+        <div class="flag-content">
+          <strong>Video visit anomaly — inverse of Paid Social</strong>
+          <p>Visits +449% (125K→685K). Almost certainly receiving visits rerouted from Paid Social by the UTM reclassification. GMS only +7.4% despite spike, consistent with Tier 3 spend-based construction. Do not report as organic Video growth.</p>
+        </div>
+      </div>
+      <div class="flag-item warn">
+        <div class="flag-icon">⚠️</div>
+        <div class="flag-content">
+          <strong>Slack authentication failed — pipeline events unverified</strong>
+          <p>Pipeline event search could not be completed this run. No pipeline announcements found via Glean for the review period. Manual check of #olive_garden_analytics required to confirm no data pipeline issues affected the weekly numbers.</p>
+        </div>
+      </div>
+      <div class="flag-item info">
+        <div class="flag-icon">ℹ️</div>
+        <div class="flag-content">
+          <strong>Display +84.1% — investigation recommended</strong>
+          <p>Large CVR jump (3.83%→5.99%). Verify whether this reflects real conversion improvement (creative quality, audience targeting) or a base-period comparison effect from holiday multiplier expiry in late 2025 that is now anniversary-comparing against a lower base.</p>
+        </div>
+      </div>
+      <div class="flag-item info">
+        <div class="flag-icon">ℹ️</div>
+        <div class="flag-content">
+          <strong>BigQuery unavailable — max confidence is "Likely explained"</strong>
+          <p>Experiment registry was not queried directly. "Explained" confidence requires BQ confirmation of no active experiments confounding results. The most recent test on record (US PLA Q1 2026, iROAS 1.56) completed its cooldown Feb 28 and is not active in this period.</p>
+        </div>
+      </div>
+      <div class="flag-item info">
+        <div class="flag-icon">ℹ️</div>
+        <div class="flag-content">
+          <strong>CQ-18 trend lag: most recent week is 2026-05-04</strong>
+          <p>Trend data is 10 days behind today. Seasonal and anomaly z-scores are relative to the prior week (May 4), not the current review period (May 7–13). Seasonal labels should be interpreted with this lag in mind.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Active experiments -->
+    <div style="margin-top:40px;">
+      <div class="section-title">Active Experiments</div>
+      <div class="callout callout-info">
+        <strong>No active experiments during May 7–13 review period.</strong> The most recent test (US PLA Q1 2026 TBR-MM Go Dark, Feb 3–28) completed cooldown on Feb 28 with iROAS 1.50–1.56, confirming PLA is incremental. BigQuery was unavailable this run; experiment registry not queried directly.
+      </div>
+    </div>
+
+  </div><!-- /tab-flags -->
+
+  <div class="footer">
+    <p>Generated 2026-05-14 &middot; Dashboard 9084 &middot; <a href="https://datran-etsy.github.io/growth-marketing/">growth-marketing reports</a></p>
+  </div>
+
+</div><!-- /page -->
+
+<script>
+// ── TAB NAVIGATION
+function showTab(name, el) {
+  document.querySelectorAll('.tab-section').forEach(s => s.classList.remove('active'));
+  document.querySelectorAll('.nav-tab').forEach(t => t.classList.remove('active'));
+  document.getElementById('tab-' + name).classList.add('active');
+  el.classList.add('active');
+  return false;
+}
+
+// ── CHANNEL TOGGLE
+function toggleChannel(header) {
+  const card = header.closest('.channel-card');
+  card.classList.toggle('open');
+}
+
+// ── JUMP TO CHANNEL
+function jumpToChannel(id) {
+  showTab('channels', document.querySelector('.nav-tab:nth-child(3)'));
+  setTimeout(() => {
+    const el = document.getElementById('ch-' + id);
+    if (el) {
+      el.classList.add('open');
+      el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+  }, 50);
+}
+
+// ── ANIMATED KPI COUNTERS
+function animateCounters() {
+  document.querySelectorAll('[data-count]').forEach(el => {
+    const target = parseFloat(el.dataset.count);
+    const prefix = el.dataset.prefix || '';
+    const suffix = el.dataset.suffix || '';
+    const decimals = (el.dataset.count.includes('.') ? el.dataset.count.split('.')[1].length : 0);
+    const duration = 1000;
+    const start = performance.now();
+    function update(now) {
+      const t = Math.min((now - start) / duration, 1);
+      const ease = 1 - Math.pow(1 - t, 3);
+      const val = (target * ease).toFixed(decimals);
+      el.textContent = prefix + val + suffix;
+      if (t < 1) requestAnimationFrame(update);
+    }
+    requestAnimationFrame(update);
+  });
+}
+
+// ── CHARTS
+const CHANNELS = ['PLA','Seo','SEM-NB','Paid Social','Display','Affiliates','Soc Creator','Video','SEM Brand','App'];
+const CURRENT  = [26.28, 14.03, 8.39, 4.50, 3.66, 2.03, 1.60, 1.49, 0.635, 0.390];
+const PRIOR    = [20.61, 12.96, 6.79, 3.60, 1.99, 1.49, 0.89, 1.39, 0.788, 0.490];
+const YOY_PCT  = [27.5, 8.3, 23.5, 24.9, 84.1, 36.6, 79.3, 7.4, -19.4, -20.3];
+
+const ORANGE = '#F1641E';
+const GREEN  = '#1B8B45';
+const RED    = '#C62828';
+const GRAY   = '#D1D5DB';
+
+function buildCharts() {
+  // GMS Current vs Prior
+  new Chart(document.getElementById('chart-gms'), {
+    type: 'bar',
+    data: {
+      labels: CHANNELS,
+      datasets: [
+        {
+          label: 'Current',
+          data: CURRENT,
+          backgroundColor: ORANGE,
+          borderRadius: 4,
+        },
+        {
+          label: 'Prior Year',
+          data: PRIOR,
+          backgroundColor: GRAY,
+          borderRadius: 4,
+        }
+      ]
+    },
+    options: {
+      responsive: true,
+      maintainAspectRatio: false,
+      plugins: {
+        legend: { position: 'bottom', labels: { font: { size: 11 }, padding: 12 } },
+        tooltip: {
+          callbacks: {
+            label: ctx => ` ${ctx.dataset.label}: $${ctx.parsed.y.toFixed(2)}M`
+          }
+        }
+      },
+      scales: {
+        x: { ticks: { font: { size: 10 } }, grid: { display: false } },
+        y: {
+          ticks: { font: { size: 10 }, callback: v => '$' + v + 'M' },
+          grid: { color: '#F3F4F6' }
+        }
+      }
+    }
+  });
+
+  // YoY %
+  new Chart(document.getElementById('chart-yoy'), {
+    type: 'bar',
+    data: {
+      labels: CHANNELS,
+      datasets: [{
+        label: 'YoY %',
+        data: YOY_PCT,
+        backgroundColor: YOY_PCT.map(v => v >= 0 ? GREEN : RED),
+        borderRadius: 4,
+      }]
+    },
+    options: {
+      responsive: true,
+      maintainAspectRatio: false,
+      plugins: {
+        legend: { display: false },
+        tooltip: {
+          callbacks: {
+            label: ctx => ` ${ctx.parsed.y > 0 ? '+' : ''}${ctx.parsed.y}% YoY`
+          }
+        }
+      },
+      scales: {
+        x: { ticks: { font: { size: 10 } }, grid: { display: false } },
+        y: {
+          ticks: { font: { size: 10 }, callback: v => v + '%' },
+          grid: { color: '#F3F4F6' }
+        }
+      }
+    }
+  });
+}
+
+// ── INIT
+window.addEventListener('DOMContentLoaded', () => {
+  animateCounters();
+  buildCharts();
+});
+</script>
 </body>
 </html>
